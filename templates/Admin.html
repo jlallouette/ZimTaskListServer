@@ -1,0 +1,88 @@
+{# Admin.html #}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href="{{ user.GetCssURL() }}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<a href="{{ url_for('.homepage') }}", style='display:table-cell;'>Back</a>
+		{%- if logged %}
+			<form action="Admin" class="stdform" method="post">
+				<div class="PrefSectionTitle">
+					Application Parameters
+				</div>
+				<div style="display:table;">
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Local use:</div>
+						{%- if appli.nologin %}
+							<input class="stdChkBx" type="checkbox" name="nologinchckbox" checked="yes" style="display:table-cell;"/>
+						{%- else %}
+							<input class="stdChkBx" type="checkbox" name="nologinchckbox" style="display:table-cell;"/>
+						{%- endif %}
+					</div>
+					<div style="display:{% if appli.nologin %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">Update every x sec.:</div>
+						<input type="text" name="localUpdatePeriod" value="{{ appli.localUpdatePeriod }}" style="display:table-cell;">
+					</div>
+					<div style="display:{% if not appli.nologin %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">Allow user creation:</div>
+						{%- if appli.allowUserCreation %}
+							<input class="stdChkBx" type="checkbox" name="allowUserCreation" checked="yes" style="display:table-cell;"/>
+						{%- else %}
+							<input class="stdChkBx" type="checkbox" name="allowUserCreation" style="display:table-cell;"/>
+						{%- endif %}
+					</div>
+					<div style="display:{% if not appli.nologin %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">Mail Sender Address:</div>
+						<input type="text" name="mailSenderAddress" value="{{ appli.mailSenderAddress }}" style="display:table-cell;">
+					</div>
+					<div style="display:{% if not appli.nologin %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">SendMail path:</div>
+						<input type="text" name="mailSendMailPath" value="{{ appli.mailSendMailPath }}" style="display:table-cell;">
+					</div>
+					<div style="display:{% if not appli.nologin %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">Login page theme:</div>
+						<select name="cssTheme" style="display:table-cell;">
+							{%- for theme in appli.GetAvailableThemes() %}
+								{%- if appli.cssTheme == theme %}
+									<option selected value="{{ theme }}">{{ theme }}</option>
+								{%- else %}
+									<option value="{{ theme }}">{{ theme }}</option>
+								{%- endif %}
+							{%- endfor %}
+						</select>
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">&nbsp;</div>
+						<div style="display:table-cell;"><button type="submit" class="LoadingButton" name="UpdateApplicationBtn" value="updatePref"> Save </button></div>
+					</div>
+				</div>
+			</form>
+
+			{% set fromCreateUserPage = False %}
+			{% set PageDest = 'Admin' %}
+			{% include "CreateUserInt.html" %}
+
+			<form action="Admin" class="stdform" method="post">
+				<div class="PrefSectionTitle">
+					User management
+				</div>
+				<div style="display:table;">
+				{%- for user in appli.GetAllUsers()%}
+					<div style="display:table-row;">
+						<div style="display:table-cell;">{{ user.login }}</div>
+						<div style="display:table-cell;">{%- if not user.isAdmin %} <button type="submit" class="LoadingButton" name="DeleteUserBtn" value="{{ user.id }}"> Delete </button>{%- endif %}</div>
+					</div>
+				{%- endfor %}
+				</div>
+			</form>
+		{%- endif %}
+		<div class="ErrorMsg">{{ ErrorMsg }}</div>
+		<div class="TechMsg">{{ TechnicalMsg }}</div>
+		<div class="OkMsg"> {{ ConfirmationMsg }} </div>
+	</body>
+	<script src="static/js/jquery-1.11.3.min.js"></script>
+	<script src="static/js/jquery-ui.min.js"></script>
+	<script src="static/js/functions.js"></script>
+</html>

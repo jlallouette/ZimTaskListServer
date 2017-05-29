@@ -1,0 +1,54 @@
+{# templates/mail.html #}
+<html>
+	<head>
+		<style>
+			{{ cssContent }}
+			.headerInt .tags, .headerInt .duration, .headerInt .status {
+				display:none;
+			}
+			.taskInt .tags, .taskInt .duration, .taskInt .status {
+				display:none;
+			}
+			.taskStarted .tags, .taskStarted .duration, .taskStarted .status {
+				display:none;
+			}
+			.Comment .CommentDuration, .Comment .CommentTags {
+				display:none;
+			}
+			.CommentForm {
+				display:none;
+			}
+			.task:hover div div .TaskButtons {
+				display:none;
+			}
+			.task div:first-child div:nth-child(2)  { -webkit-border-top-left-radius:7px; -moz-border-radius-topleft:7px; border-top-left-radius: 7px; }
+			.task div:last-child div:nth-child(2) { -webkit-border-bottom-left-radius:7px; -moz-border-radius-bottomleft:7px; border-bottom-left-radius: 7px; }
+			.MailCategory {
+
+			}
+		</style>
+	</head>
+	<body>
+		<div class="taskList">
+			<div class="header">
+				<div class="headerInt">
+					<div class="status", style="font-size:13px;">State</div>
+					<div class="priority">Prio</div>
+					<div class="duration"><div>Dur.</div></div>
+					<div class="content">Description</div>
+					<div class="duedates"><div>Due Date</div></div>
+					<div class="tags">Tags</div>
+					<div class="parentPage">Page</div>
+				</div>
+			</div>
+			{% for category in categories %}
+				<div class="MailCategory">
+					<div class="CategoryHeader"> {{ category.title }} </div>
+					{% for task in category.tasks %}
+						{% include "task.html" %}
+					{% endfor %}
+				</div>
+			{% endfor %}
+		</div>
+	</body>
+</html>

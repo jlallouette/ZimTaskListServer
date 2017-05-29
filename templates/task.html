@@ -1,0 +1,13 @@
+{# templates/task.html #}
+{{ task.getHtml(pageMngr) }}
+{%- if task.children.where(pageMngr.GetSubTaskFilter()).count() > 0 %}
+<div class="subtask">
+{%- else %}
+<div class="subtask", id="SubTask{{ task.id }}", style="display:none">
+{%- endif %}
+	{%- for task in task.children.where(pageMngr.GetSubTaskFilter()).order_by(pageMngr.GetSubTaskOrdering()) recursive %}
+		{% include "task.html" %}
+	{%- endfor %}
+	{{ task.getAddSubTaskHtml() }}
+</div>
+	{{ task.getAddTaskHtml() }}

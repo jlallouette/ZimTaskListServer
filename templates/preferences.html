@@ -1,0 +1,197 @@
+{# login.html #}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href="{{ user.GetCssURL() }}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<a href="{{ url_for('.homepage') }}", style='display:table-cell;'>Back</a>
+		{%- if logged %}
+		<form action="Preferences" class="stdform" method="post">
+			<div class="PrefSectionTitle">
+				Common Parameters
+			</div>
+			<div style="display:table;">
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Login:</div>
+					<div style="display:table-cell;">{{ user.login }}</div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Password:</div>
+					<input type="password" name="passwordField" value="{{ fakePwd }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;"/>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Theme:</div>
+					<select name="cssTheme" style="display:table-cell;">
+						{%- for theme in user.GetAvailableThemes() %}
+							{%- if user.cssTheme == theme %}
+								<option selected value="{{ theme }}">{{ theme }}</option>
+							{%- else %}
+								<option value="{{ theme }}">{{ theme }}</option>
+							{%- endif %}
+						{%- endfor %}
+					</select>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">&nbsp;</div>
+					<div style="display:table-cell;"><button class="LoadingButton" type="submit" name="UpdateCommonBtn" value="updatePref"> Save </button></div>
+				</div>
+			</div>
+		</form>
+		</br>
+		<form action="Preferences" class="stdform" method="post">
+			<div class="PrefSectionTitle">
+				Calendar Feature Parameters
+			</div>
+			<div style="display:table;">
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Enable calendar:</div>
+					{%- if user.calEnable %}
+						<input class="stdChkBx" type="checkbox" name="calEnable" checked="yes" style="display:table-cell;"/>
+					{%- else %}
+						<input class="stdChkBx" type="checkbox" name="calEnable" style="display:table-cell;"/>
+					{%- endif %}
+				</div>
+				<div style="display:{% if user.calEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Calendar URL:</div>
+					<input type="text" name="calURL" value="{{ user.calURL }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.calEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Calendar login:</div>
+					<input type="text" name="calUsrName" value="{{ user.calUsrName }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.calEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Calendar password:</div>
+					<input type="password" name="calPwd" value="{{ fakePwd }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;"></td>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">&nbsp;</div>
+					<div style="display:table-cell;"><button class="LoadingButton" type="submit" name="UpdateCalendarBtn" value="updatePref"> Save </button></div>
+				</div>
+			</div>
+		</form>
+		</br>
+		<form action="Preferences" class="stdform" method="post">
+			<div class="PrefSectionTitle">
+				Mail Reminders Parameters
+			</div>
+			<div style="display:table;">
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Enable mail reminders:</div>
+					{%- if user.mailEnable %}
+						<input class="stdChkBx" type="checkbox" name="mailEnable" checked="yes" style="display:table-cell;"/>
+					{%- else %}
+						<input class="stdChkBx" type="checkbox" name="mailEnable" style="display:table-cell;"/>
+					{%- endif %}
+				</div>
+				<div style="display:{% if user.mailEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Mail Address:</div>
+					<input type="text" name="mailAddress" value="{{ user.mailAddress }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.mailEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Mail Subject:</div>
+					<input type="text" name="mailSubject" value="{{ user.mailSubject }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.mailEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Mail Days:</div>
+					<input type="text" name="mailDays" value="{{ user.mailDays }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.mailEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Mail Times:</div>
+					<input type="text" name="mailTimes" value="{{ user.mailTimes }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:{% if user.mailEnable %}table-row{% else %}none{% endif %};">
+					<div style="display:table-cell;">Mail Categories:</div>
+					<input type="text" name="mailCategories" value="{{ user.mailCategories }}" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">&nbsp;</div>
+					<div style="display:table-cell;"><button type="submit" class="LoadingButton" name="UpdateMailBtn" value="updatePref"> Save </button></div>
+				</div>
+			</div>
+		</form>
+		</br>
+		<form action="Preferences" class="stdform" method="post">
+			<div class="PrefSectionTitle">
+				Notebooks Parameters
+			</div>
+			{%- for notebook in user.notebooks %}
+				<div class="NotebooksPrefs">
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Notebook Name:</div>
+						<input type="text" name="NoteBooksName_{{ notebook.id }}" value="{{ notebook.name }}" style="display:table-cell;">
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Notebook path:</div>
+						<input type="text" name="NoteBooksPath_{{ notebook.id }}" value="{{ notebook.path }}" style="display:table-cell;">
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Notebook root path:</div>
+						<input type="text" name="NoteBooksRootPath_{{ notebook.id }}" value="{{ notebook.rootPath }}" style="display:table-cell;">
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Notebook URL:</div>
+						<input type="text" name="NoteBooksURL_{{ notebook.id }}" value="{{ notebook.url }}" style="display:table-cell;">
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">Use git:</div>
+						{%- if notebook.useGit %}
+							<input class="stdChkBx" type="checkbox" name="UseGit_{{ notebook.id }}" checked="yes" style="display:table-cell;"/>
+						{%- else %}
+							<input class="stdChkBx" type="checkbox" name="UseGit_{{ notebook.id }}" style="display:table-cell;"/>
+						{%- endif %}
+					</div>
+					<div style="display:{% if notebook.useGit %}table-row{% else %}none{% endif %};">
+						<div style="display:table-cell;">Notebook git repo:</div>
+						<input type="text" name="NoteBooksGitRepo_{{ notebook.id }}" value="{{ notebook.repoPath }}" style="display:table-cell;">
+					</div>
+					<div style="display:table-row;">
+						<div style="display:table-cell;">&nbsp;</div>
+						<div style="display:table-cell;"><button type="submit" class="LoadingButton" name="RemoveNotebook" value="{{ notebook.id }}"> Remove </button></div>
+					</div>
+				</div>
+			{%- endfor %}
+			<div class="NotebooksPrefs">
+				<div style="display:table-row;">
+					<div style="display:table-cell;">New Notebook:</div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Notebook Name:</div>
+					<input type="text" name="NoteBooksName" value="" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Notebook path:</div>
+					<input type="text" name="NoteBooksPath" value="" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Notebook root path:</div>
+					<input type="text" name="NoteBooksRootPath" value="" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Notebook URL:</div>
+					<input type="text" name="NoteBooksURL" value="" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Use git:</div>
+					<input class="stdChkBx" type="checkbox" name="UseGit" style="display:table-cell;"/>
+				</div>
+				<div style="display:none;">
+					<div style="display:table-cell;">Notebook git repo:</div>
+					<input type="text" name="NoteBooksGitRepo" value="" style="display:table-cell;">
+				</div>
+			</div>
+			<button type="submit" class="LoadingButton" name="UpdateNotebooksBtn" value="updatePref"> Save </button>
+		</form>
+
+		{%- endif %}
+		<div class="ErrorMsg"> {{ ErrorMsg }} </div>
+		<div class="TechMsg">{{ TechnicalMsg }}</div>
+		<div class="OkMsg"> {{ ConfirmationMsg }} </div>
+	</body>
+	<script src="static/js/jquery-1.11.3.min.js"></script>
+	<script src="static/js/jquery-ui.min.js"></script>
+	<script src="static/js/functions.js"></script>
+</html>
+
+

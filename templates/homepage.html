@@ -1,0 +1,148 @@
+{# homepage.html #}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link rel="stylesheet" media="all" type="text/css" href="https://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />	
+	<link href="{{ user.GetCssURL() }}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="Errorbar">
+			<noscript> Adding tasks and comments will not work without Javascript enabled.</noscript>
+			<div class="ErrorMsg"> {{ ErrorMsg }} </div>
+		</div>
+		<div class="TechMsg">{{ TechnicalMsg }}</div>
+		<div class="menu">
+			<div class="MenuTaskButtons", style="display:inline-block;float:left;">
+				<button type="button", class="AddTaskButton", id="-1", title="Add a task"><img src="static/img/add-task-icon.png"/></button>
+				<button type="button", class="AddTaskGroupButton", id="-1", title="Add a taskgroup"><img src="static/img/add-taskgroup-icon.png"/></button>
+			</div>
+			<div style="display:inline-block;float:right;">
+				{{ user.login }}
+				<a href="Preferences" title="Preferences">
+					<img src="static/img/preferences-icon.png" style="width:24px;height:24px;position:relative;top:5px;"/>
+					Preferences
+				</a>
+				{%- if user.isAdmin %}
+					<a href="Admin" title="Admin page">
+						<img src="static/img/admin-page-icon.png" style="width:24px;height:24px;position:relative;top:5px;"/>
+						Admin.
+					</a>
+				{%- endif %}
+				{%- if not appli.nologin %}
+				<a href="Logout" title="Logout">
+					<img src="static/img/Apps-session-logout-icon.png" style="width:24px;height:24px;position:relative;top:5px;"/>
+					Logout
+				</a>
+				{%- endif %}
+			</div>
+			<form action="." class="form" id="menuform" method="post">
+				<div class="SearchBar">
+					<input type="text" name="SearchBar" value="{{ session['searchFilt'] }}" onKeyPress="return submitenter(this,event)">
+					<button type="submit" class="SearchButton"><img src="static/img/search-icon.png"/></button>
+				</div>
+				<div class="DisplayControl"> 
+					Display:</br>
+					<select id="chckboxcontent" name="chckboxcontent" onchange="this.form.submit()">
+						{{pageMngr.PrintChckBoxOptions()}} 
+					</select>
+				</div>
+				<div class="GroupByControl"> 
+					{%- if pageMngr.GroupByTaskGroups() %}
+					<input type="checkbox" name="groupbydropdown" id="groupbydropdown" onchange="this.form.submit()" checked />
+					{%- else %}
+					<input type="checkbox" name="groupbydropdown" id="groupbydropdown" onchange="this.form.submit()" />
+					{%- endif %}
+					<label for="groupbydropdown"><span></span>Group tasks</label>
+				</div>
+				<div class="OrderByControl"> 
+					Order by:</br>
+					{{pageMngr.PrintOrderBy()}} 
+					{%- if pageMngr.HasOrderByClauses() %}
+						&nbsp;
+						<button class="ClearButtonOrderBy" type="submit" value="clearOrderBy" id="ClearButtonOrderBy" name="ClearButtonOrderBy">
+							<img src="static/img/Button-Close-icon.png"/>
+						</button>
+					{%- endif %}
+				</div>
+				<div class="TagFilterControl">
+					Tag filter:</br>
+					{{pageMngr.PrintTagFilter()}} 
+					{%- if pageMngr.HasTagFilters() %}
+						&nbsp;
+						<button class="ClearButton" type="submit" value="clearTagFilters" id="ClearButton" name="ClearButton">
+							<img src="static/img/Button-Close-icon.png"/>
+						</button>
+					{%- endif %}
+					<button type="button" class="ImgButton" id="ShowTagCloudFilter" title="Show/Hide the tag list.">
+						<img src="static/img/green-tag-icon.png"/>
+					</button>
+					<div id="TagFilterCloud" style="display:none;">
+						{{ user.getTagCloudHTML() }}
+					</div>
+				</div>
+				<noscript><input type="submit" value="Submit"></noscript>
+			</form>
+		</div>
+		<div class="taskList">
+			<div class="header">
+				<div class="headerInt">
+					<div class="status", style="font-size:13px;">State</div>
+					<div class="priority">Prio</div>
+					<div class="duration"><div>Dur.</div></div>
+					<div class="content">Description</div>
+					<div class="duedates"><div>Due Date</div></div>
+					<div class="tags">Tags</div>
+					<div class="parentPage">Page</div>
+				</div>
+			</div>
+
+			{{ user.getAddTaskPregenHTML() }}
+
+			{% if taskgroups %}
+				{% for taskgroup in taskgroups %}
+					<div class="taskgroup">
+						<form action="." class="tgStatusForm" method="post">
+							<button class="StatusButton" type="submit" value="{{ taskgroup.GetStatusButtonVal(taskgroup.getState() + 1) }}" name="TaskGroupStatusButton">
+								{%- if taskgroup.getState() == 0 %}
+									<img src = "static/img/unchecked-box.png"/>
+								{%- elif taskgroup.getState() == 1 %}
+									<img src = "static/img/checked-box.png"/>
+								{%- elif taskgroup.getState() == 2 %}
+									<img src = "static/img/xchecked-box.png"/>
+								{%- endif %}
+							</button>
+						</form>
+						<div class="title">
+							<div class="TaskGroupButtons">
+								<button class="AddTaskGroupButton", id="{{ taskgroup.id }}", title="Add a taskgroup following this one"><img src="static/img/add-taskgroup-icon.png"/></button>
+							</div>
+							{%- if taskgroup.descr or taskgroup.getDuration() %}
+								{{ pageMngr.ParseAndHighlight(taskgroup.markupContent) }} 
+							{%- endif %}
+						</div>
+						{% for com in taskgroup.taskGroupComment %}
+							<div class="Comment"> {{ pageMngr.ParseAndHighlight(com.html()) }} </div>
+						{% endfor %}
+						{% for task in pageMngr.TaskGroupQuery(taskgroup) %}
+							{{ task.getFullHtml(pageMngr) }}
+						{% endfor %}
+					</div>
+					{{ taskgroup.getAddTaskGroupPregenHTML() }}
+				{% endfor %}
+			{% else %}
+				{% for task in tasks %}
+					{{ task.getFullHtml(pageMngr) }}
+				{% endfor %}
+			{% endif %}
+		</div>
+
+		<div id="TagDialogBox" title="Choose a tag.">
+			{{ user.getTagCloudHTML() }}
+		</div>
+	</body>
+	<script src="static/js/jquery-1.11.3.min.js"></script>
+	<script src="static/js/jquery-ui.min.js"></script>
+	<script src="static/js/functions.js"></script>
+	<script> {{ pageMngr.GetSpecificScripts() }} </script>
+</html>

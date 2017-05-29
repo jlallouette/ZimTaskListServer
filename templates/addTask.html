@@ -1,0 +1,27 @@
+{# templates/addTask.html #}
+<div class="task", id="{{ addType }}{{ taskid }}", style="display:none">
+	<div class="taskAdding">
+		<form action="." class="addtaskform" method="post">
+			{%- if addTaskHeader %}
+				<div class="notePgSelect">
+					Add to page:&nbsp;
+					<select name="notepgselect" style="display:inline-block;margin-top:5px;">
+						{%- for notebook in user.notebooks %}
+							<optgroup label="{{ notebook.name }}">
+								{%- for notepg in notebook.GetNotePages() %}
+									<option value="{{ notepg.id }}">{{ notepg.getHierarchicalViewName() }}</option>
+								{%- endfor %}
+							</optgroup>
+						{%- endfor %}
+					</select>
+				</div>
+			{%- endif %}
+			<button type="button", class="CloseButton", id="{{ taskid }}", title="Close the form"><img src="static/img/Button-Close-icon.png"/></button>
+			<input type="text" class="AddTaskText" name="AddTaskText" id="{{ tasktype }}_{{ taskid }}" value="">
+			<button type="button", class="CalendarButton", id="{{ tasktype }}_{{ taskid }}", title="Choose date"><img src="static/img/calendar-icon.png"/></button>
+			<button type="button", class="TagCloudButton", id="{{ tasktype }}_{{ taskid }}", title="Add Tags"><img src="static/img/green-tag-icon.png"/></button>
+			<button class="AddTaskBtn" name="AddTaskBtn" value="{{ tasktype }}{{ taskid }}" type="submit">Add Task</button>
+		</form>
+	</div>
+</div>
+

@@ -1,0 +1,96 @@
+{# templates/taskInt.html #}
+<div class="task">
+	<div class= {{ task.taskIntClass() }} >
+		<div class="status">
+			<form action="." class="statusform" method="post">
+				<button class="StatusButton" type="submit" value="{{ task.GetStatusButtonVal(task.state + 1) }}" name="StatusButton">
+					{%- if task.state == 0 %}
+						<img src = "static/img/unchecked-box.png"/>
+					{%- elif task.state == 1 %}
+						<img src = "static/img/checked-box.png"/>
+					{%- elif task.state == 2 %}
+						<img src = "static/img/xchecked-box.png"/>
+					{%- endif %}
+				</button>
+				<button class="CancelButton" type="submit" name="CancelButton" value="{{ task.GetStatusButtonVal(task.state + 2) }}">
+					{%- if ((task.state + 2) % 3) == 0 %}
+						<img src = "static/img/unchecked-box.png"/>
+					{%- elif ((task.state + 2) % 3) == 1 %}
+						<img src = "static/img/checked-box.png"/>
+					{%- elif ((task.state + 2) % 3) == 2 %}
+						<img src = "static/img/xchecked-box.png"/>
+					{%- endif %}
+				</button>
+			</form>
+		</div>
+		<div class="priority", style="background-color: rgb({{ task.GetPriorityColor(colorHighPrio, colorLowPrio, maxPrio) }});">
+			{{ task.GetPriorityStr() }}
+		</div>
+		<div class="duration">
+			{%- if task.getDuration() %}
+				{{ task.GetDurationStr() }}
+			{%- else %}
+				-
+			{%- endif %}
+			<form action="." class="startform" method="post">
+				<button class="StartButton" type="submit" value="{{ task.GetStartButtonVal() }}" name="StartButton">
+					{%- if task.started == 0 %}
+						Start
+					{%- else %}
+						Stop
+					{%- endif %}
+				</button>
+			</form>
+		</div>
+		<div class="content">
+			<div class="TaskButtons">
+				<button class="AddTaskButton", id="{{ task.id }}", title="Add a task following this one"><img src="static/img/add-task-icon.png"/></button>
+				<button class="AddSubTaskButton", id="{{ task.id }}", title="Add a subtask"><img src="static/img/add-subtask-icon.png"/></button>
+				<button class="AddCommButton", id="{{ task.id }}", title="Add a comment"><img src="static/img/Comment-add-icon.png"/></button>
+			</div>
+<!-- PreGen -->
+		</div>
+		<div class="{{ task.getDueDateClassName() }}">
+			{%- if task.mostUrgentDate %}
+				{%- for due in task.GetDueDates() %}
+					{{ due.html() }}
+				{%- endfor %}
+			{%- else %}
+				-
+			{%- endif %}
+		</div>
+		<div class="tags">
+<!-- PreGen -->
+		</div>
+		<div class="parentPage">
+			{%- if task.parentPage.book.url != '' %}
+				<a href="{{ task.parentPage.book.url + '/' + task.parentPage.path.replace(':', '/') + '.html' }}", target="_blank">{{ task.parentPage.path }}</a>
+			{%- else %}
+				{{ task.parentPage.path }}
+			{%- endif %}
+		</div>
+	</div>
+<!-- PreGen -->
+	{%- for com in task.comments %}
+		{% include "comment.html" %}
+	{%- endfor %}
+<!-- PreGen -->
+	<div class="Comment", id="Comment{{ task.id }}", style="display:none;">
+		<div class="CommentState">&nbsp;</div>
+		<div class="CommentPrio">
+			<button class="CloseButton", id="{{ task.id }}", title="Close the form"><img src="static/img/Button-Close-icon.png"/></button>
+		</div>
+		<div class="CommentDuration">&nbsp;</div>
+		<div class="CommentInt">
+			<div class="CommAddDiv">
+			<form action="." class="commform" method="post">
+				<input type="text" class= "AddComText" name="CommentText" id="{{ task.id }}" value="">
+				<button name="AddCommentBtn" value="{{ task.id }}" type="submit">Add</button>
+			</form>
+			</div>
+		</div>
+		<div class="CommentDue">&nbsp;</div>
+		<div class="CommentTags">&nbsp;</div>
+		<div class="CommentPage">&nbsp;</div>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+{# templates/addTaskGroup.html #}
+<div class="taskgroup", id="AddTaskGroup{{ taskgroupid }}", style="display:none">
+	<form action="." class="addtaskgroupform" method="post">
+		{%- if addTaskHeader %}
+			<div class="notePgSelect">
+				Add to page:&nbsp;
+				<select name="notepgselect" style="display:inline-block;margin-bottom:5px;">
+					{%- for notebook in user.notebooks %}
+						<optgroup label="{{ notebook.name }}">
+							{%- for notepg in notebook.GetNotePages() %}
+								<option value="{{ notepg.id }}">{{ notepg.getHierarchicalViewName() }}</option>
+							{%- endfor %}
+						</optgroup>
+					{%- endfor %}
+				</select>
+			</div>
+		{%- endif %}
+		<select class="AddTaskGroupSelect" name="TaskGroupType">
+			<option selected value="None">None</option>
+			<option selected value="TODO">TODO</option>
+			<option value="FIXME">FIXME</option>
+		</select>
+		<input type="text" class="AddTaskGroupText" name="AddTaskGroupDescr" id="taskgroupText{{ taskgroupid }}" value="" tabindex=1></input>
+		<button type="button", class="CalendarButton", id="taskgroupText{{ taskgroupid }}", title="Choose date"><img src="static/img/calendar-icon.png"/></button>
+		<button type="button", class="TagCloudButton", id="taskgroupText{{ taskgroupid }}", title="Add Tags"><img src="static/img/green-tag-icon.png"/></button>
+		<div class="task">
+			<div class="taskAdding">
+				<form action="." class="addtaskform" method="post">
+					<button type="button", class="CloseButtonTg", id="{{ taskgroupid }}", title="Close the form"><img src="static/img/Button-Close-icon.png"/></button>
+					<input type="text" class="AddTaskText" name="AddTaskGroupText" value="" id="taskgrouptaskText{{ taskgroupid }}" tabindex=1></input>
+					<button type="button", class="CalendarButton", id="taskgrouptaskText{{ taskgroupid }}", title="Choose date"><img src="static/img/calendar-icon.png"/></button>
+					<button type="button", class="TagCloudButton", id="taskgrouptaskText{{ taskgroupid }}", title="Add Tags"><img src="static/img/green-tag-icon.png"/></button>
+					<button class="AddTaskGroupBtn" name="AddTaskGroupBtn" value="tgbelow{{ taskgroupid }}" type="submit">Add Taskgroup</button>
+				</form>
+			</div>
+		</div>
+	</form>
+</div>

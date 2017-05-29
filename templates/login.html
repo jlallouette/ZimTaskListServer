@@ -1,0 +1,34 @@
+{# login.html #}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href="{{ appli.GetCssURL() }}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div style="height:200px;"></div>
+		<div style="margin:auto;display:table;">
+			<form action="." class="stdform" method="post">
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Login:</div>
+					<input class="stdInput" type="text" name="loginField" value="" onKeyPress="return submitenter(this,event)" style="display:table-cell;">
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">Password:</div>
+					<input class="stdInput" type="password" name="passwordField" value="" onKeyPress="return submitenter(this,event)" style="display:table-cell;"></td>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;">&nbsp;</div>
+					<div style="display:table-cell;"><button type="submit" name="loginBtn" value="login"> Login </button>&nbsp;&nbsp;
+					{%- if appli.allowUserCreation %}
+					<a href="CreateUser">Create an account</a>
+					{%- endif %}
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="ErrorMsg"> {{ ErrorMsg }} </div>
+		<div class="OkMsg"> {{ ConfirmationMsg }} </div>
+	</body>
+</html>
+

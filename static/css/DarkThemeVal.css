@@ -1,0 +1,735 @@
+@media all {
+	/* JQuery UI */
+	.ui-widget-content {
+		background:#202020 url("images/ui-bg_flat_75_ffffff_40x100.png") 50% 50% repeat-x;
+		color:orange;
+	}
+
+	.ui-widget-content a {
+		color:#FF4500;
+	}
+	.ui-widget-content a:hover {
+		color:#FF8C00;
+	}
+	.ui-widget-content a:visited {
+		color:#8B4513;
+	}
+
+	.ui-widget-header {
+		background:#353535;
+		color:darkorange;
+	}
+	.ui-state-default,
+	.ui-widget-content .ui-state-default,
+	.ui-widget-header .ui-state-default {
+		background:#FFE4B5
+	}
+
+	/* TaskListApp */
+
+	body {
+		font-family:Arial, Georgia, "Lucida Sans Unicode", "Lucida Grande", Arial, Helvetica, sans-serif;
+		font-size:16px;
+		background-color:#202020;
+	}
+
+	.stdform {
+		color:orange;
+		background-color:#353535;
+		padding:5px;
+		margin:5px;
+		border-color:#000000;
+		border-width:1px;
+		border-style:solid;
+		display:inline-block;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+		border-radius:7px;
+	}
+
+	.stdform button, .stdform input, .stdform select {
+		color:orange;
+		background-color:#333333;
+		border-color:#444444;
+		margin:2px;
+	}
+	.stdInput {
+		width:200px;
+	}
+
+	input[type="checkbox"] {
+		display:none;
+	}
+	input[type="checkbox"] + label span {
+		display:inline-block;
+		width:24px;
+		height:24px;
+		margin:-5px 2px 0 0;
+		vertical-align:middle;
+		background:url(../img/unchecked-box.png) left top no-repeat;
+		cursor:pointer; 
+	}
+	input[type="checkbox"]:checked + label span {
+		background:url(../img/checked-box.png) left top no-repeat;
+	}
+
+	.PrefSectionTitle {
+		font-weight:bold;
+		text-align:center;
+		color:darkorange;
+	}
+	.NotebooksPrefs {
+		display:table;
+		background-color:#404040;
+		padding:5px;
+		margin:5px;
+		border-color:#000000;
+		border-width:1px;
+		border-style:solid;
+		display:inline-block;
+		-webkit-border-radius:5px;
+		-moz-border-radius:5px;
+		border-radius:5px;
+	}
+
+	.HiddenError {
+		display:none;
+	}
+
+	.ErrorMsg, .OkMsg, .TechMsg {
+		font-weight:bold;
+		text-align:center;
+	}
+
+	.ErrorMsg {
+		color:red;
+	}
+
+	.TechMsg {
+		color:yellow;
+	}
+
+	.OkMsg {
+		color:green;
+	}
+
+	.Errorbar {
+		font-size:200%;
+		color:red;
+	}
+
+	.menu {
+		color:orange;
+		text-align:center;
+		vertical-align:middle;
+		margin-bottom:5px;
+	}
+
+	.menu form div {
+		display:inline-block;
+	}
+
+	.menu form div button, .menu form div select, .menu form div input {
+		color:orange;
+		background-color:#333333;
+		border-color:#444444;
+	}
+
+	.SearchBar, .DisplayControl, .GroupByControl, .OrderByControl, .TagFilterControl {
+		max-width:20%;
+		background-color:#353535;
+		padding:3px;
+		margin-right:1px;
+		margin-left:1px;
+		border-color:#000000;
+		border-width:1px;
+		border-style:solid;
+		display:inline-block;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+		border-radius:7px;
+	}
+
+	.TagFilterControl {
+		max-width:100%;
+	}
+
+	.DisplayControl select, .GroupByControl select, .OrderByControl select, .TagFilterControl select {
+		max-width:100%;
+	}
+
+	.SearchButton, .ClearButton, .ClearButtonOrderBy {
+		position:relative;
+		top:5px;
+	}
+
+	.SearchBar input {
+		width:calc(100% - 30px);
+	}
+
+	a {
+		color:#FF4500;
+	}
+
+	a:hover {
+		color:#FF8C00;
+	}
+
+	a:visited {
+		color:#8B4513;
+	}
+
+	.searchhighlight {
+		color:red;
+		font-weight:bold;
+	}
+
+	.taskList {
+		width: 100%;
+	}
+
+	.header {
+		display:table;
+		width: 100%;
+		border-width:1px;
+		border-style:solid;
+		border-right-style:none;
+		margin-bottom:5px;
+		background-color:#303030;
+		color:orange;
+
+		table-layout:fixed;
+		border-collapse: separate;
+		position:relative;
+	}
+
+	.headerInt {
+		display: table-row;
+		text-align:center;
+	}
+
+	.headerInt .status, .headerInt .priority, .headerInt .duration, .headerInt .duedates, .headerInt .content, .headerInt .tags, .headerInt .parentPage {
+		border-right-style:solid;
+		border-width:1px;
+		text-align:center;
+		vertical-align:middle;
+	}
+
+	.taskgroup {
+		background-color: #645947;
+		border-color:#312b22;
+		border-style:solid;
+		border-width:1px;
+		padding:5px;
+		padding-bottom:2px;
+		margin-bottom: 5px;
+
+		-webkit-border-radius:10px;
+		-moz-border-radius:10px;
+		border-radius:10px;
+
+	}
+
+	.taskgroup .title {
+		color:#FFFFFF;
+		text-align:left;
+		display: inline-block;
+		font-size: 125%;
+		width:calc(100% - 36px);
+		height: 20px;
+	}
+
+	.tgStatusForm {
+		float:left;
+		position:relative;
+		top:-5px;
+		display:inline-block;
+		width:36px;
+		height:29px;
+	}
+
+	.addtaskgroupform > select, .addtaskgroupform > button, .addtaskgroupform > input {
+		background-color: #645947;
+		border-color:#eaeea9;
+		color:#FFFFFF;
+	}
+	
+	.addtaskgroupform .AddTaskGroupSelect {
+		width:80px;
+		margin-bottom:5px;
+		vertical-align:top;
+	}
+
+	.addtaskgroupform .AddTaskGroupText {
+		width:calc(100% - 150px);
+		margin-bottom:5px;
+		max-width:calc(100% - 150px);
+		height:15px;
+		vertical-align:top;
+		background-color: #645947;
+	}
+
+	.task{
+		width: 100%;
+		display: table;
+		table-layout:fixed;
+		border-collapse: separate;
+		position:relative;
+		background-color: #FFE4B5;
+
+		border-style: solid;
+		border-color: #b46300;
+		border-width: 1px;
+		margin-bottom:5px;
+
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+		border-radius:7px;
+
+		overflow:hidden;
+	}
+
+	.taskInt, .taskDisabled, .taskStarted {
+		display: table-row;
+	}
+
+	.taskInt {
+	}
+
+	.taskDisabled {
+		background-color:#cab99d;
+		color:#444444;
+	}
+
+	.taskStarted {
+		background-color: #ffa14e;
+	}
+
+	.taskAdding {
+		background-color: #fbffb5;
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+		border-radius:7px;
+		display:table;
+		width:100%;
+	}
+
+	.taskDisabled + .Comment, .taskDisabled + .Comment .CommentInt {
+		background-color:#b4a386;
+	}
+
+	.taskInt + .Comment {
+		background-color:#ceb993;
+	}
+
+	.task div:first-child div:first-child { -webkit-border-top-left-radius:7px; -moz-border-radius-topleft:7px; border-top-left-radius: 7px; }
+	.task div:first-child div:last-child { -webkit-border-top-right-radius:7px; -moz-border-radius-topright:7px; border-top-right-radius: 7px; }
+	.task div:last-child div:first-child { -webkit-border-bottom-left-radius:7px; -moz-border-radius-bottomleft:7px; border-bottom-left-radius: 7px; }
+	.task div:last-child div:last-child { -webkit-border-bottom-right-radius:7px; -moz-border-radius-bottomright:7px; border-bottom-right-radius: 7px; }
+
+	.subtask {
+		width:calc(100% - 30px);
+		margin-right:0;
+		position:relative;
+		left:30px;
+		display:inline-block;
+	}
+
+	.status {
+		width: 30px;
+		display: table-cell;
+		text-align: center;
+	}
+
+	.priority {
+		width: 30px;
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.priorityHIGHESTCOLOR { background-color:#FF0000; }
+	.priorityLOWESTCOLOR { background-color:#FFFF00; }
+
+	.duration {
+		display: table-cell;
+		width:50px;
+		text-align:center;
+	}
+
+	.tgduration {
+		font-size:90%;
+	}
+
+	.duedates, .duedatesOk, .duedatesUrgent, .duedatesImportant {
+		width: 100px;
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	.dateOk, .dateUrgent, .dateImportant {
+		display: inline-block;
+	}
+
+	.dateOk, .duedatesOk {
+	}
+
+	.dateImportant, .duedatesImportant {
+		background-color: #FF8C00;
+	}
+
+	.dateUrgent, .duedatesUrgent {
+		background-color: #DC143C;
+	}
+
+	.taskDisabled .duedatesImportant, .taskDisabled .dateImportant {
+		background-color: #d3801a;
+	}
+
+	.taskDisabled .duedatesUrgent, .taskDisabled .dateUrgent {
+		background-color: #b42945;
+	}
+
+	.dateImportant {
+		background-color: #FF8C00;
+		font-weight:bold;
+	}
+
+	.dateUrgent {
+		background-color: #DC143C;
+		font-size:100%;
+		font-weight:bold;
+	}
+
+	.cyclicDateSpan {
+		font-size: 10px;
+	}
+
+	.content {
+		width: calc(80% - (160px + 250px + 50px));
+		display: table-cell;
+		padding-left:5px;
+	}
+
+	.tags {
+		width: 100px;
+		display: table-cell;
+		vertical-align: middle;
+		margin-bottom:10px;
+	}
+
+	.tagform {
+		display: inline-block;
+	}
+
+	.TagButton {
+		display: inline-block;
+		color:orange;
+		background-color:#333333;
+		border-color:#444444;
+	}
+
+	.StatusButton {
+		position:relative;
+		left:-3px;
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+	}
+
+	.StartButton {
+		display: inline-block;
+		color:black;
+		background-color:#ffa14e;
+		border: none;
+		width:100%;
+	}
+
+	.CancelButton {
+		position:relative;
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+		width:25px;
+		display:none;
+	}
+
+	.status:hover form .CancelButton {
+		display: inline-block;
+	}
+
+	.CancelButton img {
+		width:100%;
+	}
+
+	.taskStarted .StartButton {
+		background-color: #FFE4B5;
+	}
+
+	.tags form button {
+		width:100px;
+	}
+
+	.parentPage {
+		width: 150px;
+		text-align:left;
+		display: table-cell;
+		padding-right:5px;
+		padding-left:5px;
+		word-wrap:break-word;
+		vertical-align:middle;
+	}
+
+	.CommAddDiv {
+		width:100%;
+		margin:0;
+		display:table;
+	}
+
+	.commform {
+		display:table-row;
+		width:100%;
+		margin:0px;
+	}
+
+	.commform input, .commform button {
+		position:relative;
+		color:black;
+		top:-5px;
+		background-color:#d09968;
+		border-color:#444444;
+		outline:none;
+		display:table-cell;
+	}
+
+	.commform input {
+		position:relative;
+		left:-5px;
+		margin-left:5px;
+		width:calc(100% - 60px);
+		height:15px;
+	}
+
+	.commform button {
+		margin-left:0px;
+		vertical-align:top;
+		width:50px;
+	}
+	
+	.task:hover div div .TaskButtons {
+		display:inline-block;
+	}
+
+	.taskgroup:hover div .TaskGroupButtons {
+		display:inline-block;
+	}
+
+	.TaskButtons, .TaskGroupButtons {
+		float:right;
+		display:none;
+		margin:0;
+		height:20px;
+	}
+
+	.TaskButtons button, .CloseButton, .CalendarButton, .menu form div .SearchButton, .CloseButtonTg, .TaskGroupButtons button, .MenuTaskButtons button, .ClearButton, .ClearButtonOrderBy, .ImgButton, .TagCloudButton {
+		width: 20px;
+		height: 20px;
+		background-color: Transparent;
+		background-repeat:no-repeat;
+		border: none;
+		cursor:pointer;
+		overflow: hidden;
+		outline:none;
+		margin:0px;
+	}
+
+	.MenuTaskButtons button {
+		width: 30px;
+		height: 30px;
+	}
+
+	.TaskButtons button img, .CloseButton img, .CalendarButton img, .SearchButton img, .CloseButtonTg img, .TaskGroupButtons button img, .ClearButton img, .ClearButtonOrderBy img, .ImgButton img, .TagCloudButton img {
+		position:relative;
+		top:-1px;
+		left:-6px;
+		width: 20px;
+		height: 20px;
+	}
+	
+	.MenuTaskButtons button img {
+		position:relative;
+		top:-1px;
+		left:-6px;
+		width: 30px;
+		height: 30px;
+	}
+
+	.notePgSelect {
+		text-align:center;
+		margin:0;
+	}
+
+	.addtaskform > .notePgSelect {
+		color:black;
+	}
+
+	.addtaskgroupform > .notePgSelect {
+		color:#FFFFFF;
+	}
+
+	.notePgSelect select {
+		color:orange;
+		background-color:#333333;
+		border-color:#444444;
+		font-family:"courier";
+	}
+
+	.CloseButton, .CloseButtonTg {
+		margin:5px;
+	}
+
+	.AddTaskText {
+		margin:5px;
+		width:calc(90% - 90px);
+		max-width:calc(90% - 90px);
+		background-color:#eaeea9;
+		display:cell;
+		height:15px;
+
+		vertical-align:top;
+	}
+
+	.AddTaskBtn, .AddTaskGroupBtn {
+		margin:5px;
+		display:cell;
+		width:calc(10% - 30px);
+		vertical-align:top;
+		overflow:hidden;
+
+		background-color:#eaeea9;
+		border-color:#444444;
+	}
+
+	.addtaskform {
+		display:table-row;
+		vertical-align:middle;
+
+		-webkit-border-radius:7px;
+		-moz-border-radius:7px;
+		border-radius:7px;
+	}
+
+	.Comment {
+		display:table-row;
+		position:relative;
+		border:1px double #000;
+		border-color:#000000;
+		border-width:1px;
+		background-color:#ceb993;
+	}
+
+	.comheader {
+		color:#61300d;
+	}
+
+	.CommentInt {
+		background-color:#ceb993;
+		display:table-cell;
+		padding-left:5px;
+	}
+
+	.CommentState, .CommentPrio, .CommentDuration, .CommentDue, .CommentTags, .CommentPage{
+		display:table-cell;
+	}
+
+	.CategoryHeader {
+		border-style: solid;
+		border-color: #b46300;
+		border-width: 1px;
+		margin-bottom:5px;
+		font-size:150%;
+		text-align:center;
+		font-weight:bold;
+		-webkit-border-radius:7px; -moz-border-radius:7px; border-radius: 7px;
+		background-color:#af9c7c;
+	}
+}
+
+@media all and (max-width:900px) {
+	.headerInt .tags, .headerInt .duration {
+		display:none;
+	}
+	.taskInt .tags, .taskInt .duration {
+		display:none;
+	}
+	.taskStarted .tags, .taskStarted .duration {
+		display:none;
+	}
+	.taskDisabled .tags, .taskDisabled .duration {
+		display:none;
+	}
+	.taskAdding .tags, .taskAdding .duration {
+		display:none;
+	}
+	.Comment .CommentDuration, .Comment .CommentTags {
+		display:none;
+	}
+	.TagFilterControl {
+		max-width:100%;
+	}
+	.cyclicDateSpan {
+		font-size: 7px;
+	}
+	.AddComText, .commform button {
+		margin-top:5px;
+	}
+	/*
+	.CommentFormEdit form input:focus {
+		width:150px;
+		height:15px;
+	}*/
+}
+
+@media all and (max-device-width: 900px) {
+	body {
+		font-size:12px;
+	}
+	.duedates, .duedatesOk, .duedatesUrgent, .duedatesImportant {
+		width:15%;
+	}
+	.duedatesOk, .duedatesUrgent, .duedatesImportant {
+		font-size:75%;
+	}
+	.parentPage {
+		width:20%;
+	}
+	.status, .priority {
+		width:7%;
+	}
+	.StatusButton {
+		left:-7px;
+	}
+	.content {
+		width:50%;
+	}
+
+	.status:hover form .CancelButton {
+		display: none;
+	}
+	.CommentAbbr {
+		font-size:50%;
+		margin:0;
+		height:7px;
+	}
+	.CommentForm {
+		padding:2px;
+	}
+}
+

@@ -1,0 +1,21 @@
+{# CreateUser.html #}
+<!DOCTYPE html>
+<html>
+	<head>
+	<link href="{{ appli.GetCssURL() }}" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<a href="{{ url_for('.homepage') }}", style='display:table-cell;'>Back</a>
+		{%- if logged %}
+			{% set fromCreateUserPage = True %}
+			{% set PageDest = 'CreateUser' %}
+			<div style="margin:auto;display:table;">
+				{% include "CreateUserInt.html" %}
+			</div>
+		{%- endif %}
+		<div class="ErrorMsg"> {{ ErrorMsg }} </div>
+		<div class="TechMsg">{{ TechnicalMsg }}</div>
+		<div class="OkMsg"> {{ ConfirmationMsg }} </div>
+	</body>
+</html>
